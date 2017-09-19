@@ -7,22 +7,35 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.util.Log;
+import android.content.Context;
 
 public class LoginActivity extends AppCompatActivity {
+
+    EditText etUserName, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final EditText etUserName = (EditText) findViewById(R.id.etUserName);
-        final EditText etPassword = (EditText) findViewById(R.id.etPassword);
+        etUserName = (EditText) findViewById(R.id.etUserName);
+        etPassword = (EditText) findViewById(R.id.etPassword);
 
         final Button bLogin = (Button) findViewById(R.id.bLogin);
-
         final TextView registerLink = (TextView) findViewById(R.id.tvRegisterhere);
         final TextView forgetPwdLink = (TextView) findViewById(R.id.tvForgetpwd);
 
+        bLogin.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                String username = etUserName.getText().toString();
+                String password = etPassword.getText().toString();
+                String type = "Login";
+                DatabaseWorker dbWorker = new DatabaseWorker(getApplicationContext());
+                dbWorker.execute(type,username,password);
+            }
+        });
 
         registerLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,4 +56,5 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
 }

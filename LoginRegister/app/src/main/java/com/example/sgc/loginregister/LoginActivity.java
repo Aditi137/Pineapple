@@ -26,16 +26,6 @@ public class LoginActivity extends AppCompatActivity {
         final TextView registerLink = (TextView) findViewById(R.id.tvRegisterhere);
         final TextView forgetPwdLink = (TextView) findViewById(R.id.tvForgetpwd);
 
-        bLogin.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                String username = etUserName.getText().toString();
-                String password = etPassword.getText().toString();
-                String type = "Login";
-                DatabaseWorker dbWorker = new DatabaseWorker(getApplicationContext());
-                dbWorker.execute(type,username,password);
-            }
-        });
 
         registerLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,8 +43,14 @@ public class LoginActivity extends AppCompatActivity {
                 LoginActivity.this.startActivity(forgetPwdIntent);
             }
         });
+    }
 
-
+    public void onClick(View v){
+        String username = etUserName.getText().toString();
+        String password = etPassword.getText().toString();
+        String type = "Login";
+        DatabaseWorker dbWorker = new DatabaseWorker(this);
+        dbWorker.execute(type,username,password);
     }
 
 }

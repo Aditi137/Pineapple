@@ -2,6 +2,7 @@ package com.example.sgc.loginregister;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,7 +20,7 @@ import java.net.URLEncoder;
  */
 
 public class DatabaseWorker extends AsyncTask<String,Void,String> {
-    Context context;
+    static Context context;
     AlertDialog alertDialog;
 
     public DatabaseWorker(Context cntxt){
@@ -28,7 +29,7 @@ public class DatabaseWorker extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... strings) {
         String type = strings[0];
-        String login_url = "http://192.168.1.11/pineapple/login.php";
+        String login_url = "http://10.0.2.2:8888/pineapple/login.php";
         if(type.equals("Login")) {
             try {
                 String username = strings[1];
@@ -74,5 +75,15 @@ public class DatabaseWorker extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String response) {
         alertDialog.setMessage(response);
+        //alertDialog.show();
+        if(response.equals("Success")) {
+            Intent userAreaIntent = new Intent(DatabaseWorker.context, UserAreaActivity.class);
+            DatabaseWorker.context.startActivity(userAreaIntent);
+        }
+    }
+
+    @Override
+    protected void onProgressUpdate(Void... values) {
+        super.onProgressUpdate(values);
     }
 }

@@ -1,16 +1,15 @@
-<p>
-  <?php
+<?php
 require "conn.php";
 
-$id="1337";
-$password="pw123";
+$id = $_POST["username"];
+$password = $_POST["password"];
+
 $mysql_query= "select * from Accounts where id = '$id' AND password = '$password';";
 $result = mysqli_query($conn, $mysql_query);
 if(mysqli_num_rows($result) > 0){
-  echo "Login successfull";
+  echo "Success";
 }
 else{
-  echo "Login failed";
+  echo "Fail";
 }
 ?>
-</p>

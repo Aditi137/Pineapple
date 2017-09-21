@@ -10,6 +10,6 @@ if(mysqli_num_rows($result) > 0){
   echo "Success";
 }
 else{
-  echo "Fail";
+  echo "USername or password was incorrect";
 }
 ?>

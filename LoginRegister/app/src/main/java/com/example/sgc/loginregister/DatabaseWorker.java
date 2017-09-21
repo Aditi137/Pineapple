@@ -30,6 +30,7 @@ public class DatabaseWorker extends AsyncTask<String,Void,String> {
     protected String doInBackground(String... strings) {
         String type = strings[0];
         String login_url = "http://10.0.2.2:8888/pineapple/login.php";
+        String resetpw_url = "http://10.0.2.2:8888/pineapple/resetpw.php";
         if(type.equals("Login")) {
             try {
                 String username = strings[1];
@@ -62,6 +63,36 @@ public class DatabaseWorker extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }if(type.equals("ResetPW")){
+            try {
+                String email = strings[1];
+                URL url = new URL(resetpw_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String response = "";
+                String line="";
+                while ((line = bufferedReader.readLine()) != null) {
+                    response += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
@@ -69,16 +100,24 @@ public class DatabaseWorker extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Status");
+
+
     }
 
     @Override
     protected void onPostExecute(String response) {
-        alertDialog.setMessage(response);
-        //alertDialog.show();
         if(response.equals("Success")) {
             Intent userAreaIntent = new Intent(DatabaseWorker.context, UserAreaActivity.class);
             DatabaseWorker.context.startActivity(userAreaIntent);
+        }else if (response.equals("pwreset")){
+            alertDialog.setTitle("Notification");
+            alertDialog.setMessage("An email has been sent to you with instructions on " +
+                    "how to reset your password");
+            alertDialog.show();
+        }else {
+            alertDialog.setTitle("Oops");
+            alertDialog.setMessage(response);
+            alertDialog.show();
         }
     }
 
@@ -86,4 +125,5 @@ public class DatabaseWorker extends AsyncTask<String,Void,String> {
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
     }
+
 }

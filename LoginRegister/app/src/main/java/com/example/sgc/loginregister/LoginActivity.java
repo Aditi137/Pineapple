@@ -1,14 +1,12 @@
 package com.example.sgc.loginregister;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.util.Log;
-import android.content.Context;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -49,8 +47,12 @@ public class LoginActivity extends AppCompatActivity {
         String username = etUserName.getText().toString();
         String password = etPassword.getText().toString();
         String type = "Login";
-        DatabaseWorker dbWorker = new DatabaseWorker(this);
-        dbWorker.execute(type,username,password);
+        //Temp Disabled to bypass db
+        //DatabaseWorker dbWorker = new DatabaseWorker(this);
+        //dbWorker.execute(type,username,password);
+
+        Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
+        LoginActivity.this.startActivity(intent);
     }
 
 }

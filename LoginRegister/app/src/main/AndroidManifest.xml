@@ -21,7 +21,15 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".UserAreaActivity" />
         <activity android:name=".ForgetPasswordActivity" />
+        <activity android:name=".ReminderActivity" />
+        <activity android:name=".alertActivity" />
+        <activity android:name=".CreateReminderActivity" />
         <activity android:name=".AccountTypeActivity"></activity>
+        <receiver android:name=".Alarm">
+            <intent-filter>
+                <action android:name="sgc.android.mybroadcast" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

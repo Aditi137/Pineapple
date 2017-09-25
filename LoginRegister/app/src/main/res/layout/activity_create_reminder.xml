@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/date1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:text="Please Enter Date in Format of dd/mm/yyyy" />
+
+    <EditText
+        android:id="@+id/time1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="time"
+        android:text="Please Enter the time in format of hh mm" />
+
+    <EditText
+        android:id="@+id/ReDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text|textPersonName"
+        android:text="Reminder Details" />
+
+    <Button
+        android:id="@+id/remind_create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Reminder" />
+</LinearLayout>

@@ -11,13 +11,10 @@
         android:inputType="date"
         android:text="Please Enter Date in Format of dd/mm/yyyy" />
 
-    <EditText
-        android:id="@+id/time1"
+    <TimePicker
+        android:id="@+id/timePicker"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="time"
-        android:text="Please Enter the time in format of hh mm" />
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/ReDetails"

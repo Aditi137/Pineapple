@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by jon92 on 25/9/2017.
@@ -17,7 +18,14 @@ public class alertActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alertpage);
+        final String UserName = getIntent().getStringExtra("User ID");
+        int Rid = getIntent().getIntExtra("ReID",-1);
         //Call Up data from DB here
+
+
+        final TextView text =(TextView) findViewById(R.id.textView);
+        text.setText("Rid ="+Rid);
+
         Button snooze_bt = (Button) findViewById(R.id.snooze);
         Button ack =(Button) findViewById(R.id.ack);
         snooze_bt.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +45,7 @@ public class alertActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getApplicationContext(), UserAreaActivity.class);//add destination here
+                intent.putExtra("User ID",UserName);
                 startActivity(intent);
 
             }

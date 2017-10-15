@@ -94,7 +94,23 @@ public class CreateReminderActivity extends AppCompatActivity {
                 }
 
                 Intent intent = new Intent(getApplicationContext(), ReminderActivity.class);
-                startActivity(intent);
+                //startActivity(intent);
+
+                String time;
+                String date;
+                String title = event_details;
+
+                time = String.valueOf(hour) + ":" + String.valueOf(min);
+                date = String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
+
+                Intent data = new Intent();
+                data.putExtra("title", title);
+                data.putExtra("time", time);
+                data.putExtra("date", date);
+
+                setResult(RESULT_OK, data);
+
+                finish();
             }
             });
     }

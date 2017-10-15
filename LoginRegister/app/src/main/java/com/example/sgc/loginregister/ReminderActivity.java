@@ -34,6 +34,8 @@ public class ReminderActivity extends AppCompatActivity {
             public void onClick(View v)
             {
 
+                Intent intent = new Intent(getApplicationContext(), RemindersViewActivity.class);
+                startActivity(intent);
             }
         }
         );

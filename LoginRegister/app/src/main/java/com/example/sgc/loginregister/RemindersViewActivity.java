@@ -125,6 +125,12 @@ public class RemindersViewActivity extends AppCompatActivity {
     public ArrayList<Reminder> generateData() {
         ArrayList<Reminder> reminders = new ArrayList<Reminder>();
         ReminderDBHandler ReDB = new ReminderDBHandler(getApplicationContext());
+        //Run once then delete the Start to end part
+        //Start
+        ReDB.addCol("Status","TEXT");
+        ReDB.addCol("UserId","TEXT");
+        ReDB.addCol("SetBy","TEXT");
+        //End
         String UserName = getIntent().getStringExtra("User ID");
         UserName=UserName.trim();
         Cursor cursor =ReDB.getDBEntryForUser(UserName);

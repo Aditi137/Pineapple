@@ -28,22 +28,9 @@ public class RemindersViewActivity extends AppCompatActivity {
     private static final int ADD_REMINDER = 5;
     private static final int EDIT_REMINDER = 6;
 
-    //private Button btn_addReminder;
-
-    //private ArrayAdapter<String> adapter;
-    //private ArrayList<ArrayList<String>> reminderList;
-    //private ArrayList<String> reminders;
-
     private AlertDialog.Builder selOptions;
     private AlertDialog.Builder cfmDel;
-/*
-    private String reminder_title;
-    private String reminder_date;
-    private String reminder_time;
-    private String reminder_status;
-    private int reminder_id = 1;
-    private String[][] information;
-*/
+
 
     private String reminder_title;
     private String reminder_date;
@@ -63,21 +50,6 @@ public class RemindersViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder_view);
-
-        //reminders = new ArrayList<>(Arrays.asList(reminder_title));
-        //adapter = new ArrayAdapter<String>(this, R.layout.list_reminders, R.id.tv_title, reminders);
-
-        //ListView listView = (ListView) findViewById(R.id.reminders_list);
-        //listView.setAdapter(adapter);
-
-
-        //btn_addReminder = (Button) findViewById(R.id.btn_add_reminder);
-/*
-        tv_title = (TextView) findViewById(R.id.tv_title);
-        tv_date = (TextView) findViewById(R.id.tv_date);
-        tv_time = (TextView) findViewById(R.id.tv_time);
-        tv_status = (TextView) findViewById(R.id.tv_status);
-*/
 
         selOptions = new AlertDialog.Builder(this);
         selOptions.setCancelable(true);

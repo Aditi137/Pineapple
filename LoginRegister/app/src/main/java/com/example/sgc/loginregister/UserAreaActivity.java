@@ -13,6 +13,7 @@ public class UserAreaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_area);
         Button reminder = (Button) findViewById(R.id.remind_button);
+        Button add_supervisee = (Button) findViewById(R.id.test_add);
 
         reminder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -20,6 +21,14 @@ public class UserAreaActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(getApplicationContext(), ReminderActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        add_supervisee.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(getApplicationContext(), LinkAccounts.class);
+                startActivity(intent);
+
             }
         });
     }

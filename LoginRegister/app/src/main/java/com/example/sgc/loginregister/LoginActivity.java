@@ -1,6 +1,8 @@
 package com.example.sgc.loginregister;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -47,6 +49,13 @@ public class LoginActivity extends AppCompatActivity {
         String username = etUserName.getText().toString();
         String password = etPassword.getText().toString();
         String type = "Login";
+
+        SharedPreferences sharedPref = getSharedPreferences("userID", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString("username", username);
+        editor.apply();
+
         //Temp Disabled to bypass db
         DatabaseWorker dbWorker = new DatabaseWorker(this);
         dbWorker.execute(type,username,password);

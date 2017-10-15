@@ -109,6 +109,8 @@ public class DatabaseWorker extends AsyncTask<String,Void,String> {
         if(response.equals("Success")) {
             Intent userAreaIntent = new Intent(DatabaseWorker.context, UserAreaActivity.class);
             DatabaseWorker.context.startActivity(userAreaIntent);
+
+
         }else if (response.equals("pwreset")){
             alertDialog.setTitle("Notification");
             alertDialog.setMessage("An email has been sent to you with instructions on " +

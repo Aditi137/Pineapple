@@ -25,6 +25,8 @@
         <activity android:name=".alertActivity" />
         <activity android:name=".CreateReminderActivity" />
         <activity android:name=".AccountTypeActivity"></activity>
+        <activity android:name=".RemindersViewActivity"></activity>
+        <activity android:name=".EditReminderActivity"></activity>
         <receiver android:name=".Alarm">
             <intent-filter>
                 <action android:name="sgc.android.mybroadcast" />

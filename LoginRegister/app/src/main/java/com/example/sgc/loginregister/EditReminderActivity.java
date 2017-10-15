@@ -1,5 +1,7 @@
 package com.example.sgc.loginregister;
 
+import android.support.annotation.RequiresApi;
+import android.support.v7.app.AppCompatActivity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -7,8 +9,6 @@ import android.content.Intent;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,14 +16,14 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 /**
- * Created by jon92 on 24/9/2017.
+ * Created by YY on 15/10/2017.
  */
 
-public class CreateReminderActivity extends AppCompatActivity {
+public class EditReminderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_reminder);
-        Button create= (Button) findViewById(R.id.remind_create);
+        setContentView(R.layout.activity_update_reminder);
+        Button create= (Button) findViewById(R.id.remind_update);
         final EditText date1 =(EditText) findViewById(R.id.date1);
 
         final EditText details=(EditText) findViewById(R.id.ReDetails);
@@ -33,7 +33,7 @@ public class CreateReminderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                //On click goes to the create reminder in the alarm system
+                //On click goes to the update reminder in the alarm system
                 int hour = tp.getHour();
                 int min=tp.getMinute();
                 AlarmManager alarmMgr0 = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
@@ -48,7 +48,7 @@ public class CreateReminderActivity extends AppCompatActivity {
                 String event_details= details.getText().toString();
                 //Add DB statements to store data
 
-                Intent i = new Intent(CreateReminderActivity.this,Alarm.class);
+                Intent i = new Intent(EditReminderActivity.this,Alarm.class);
                 PendingIntent pi =PendingIntent.getBroadcast(getApplicationContext(),0,i,0);//Add in the ID
 
                 Calendar timeOff9 = Calendar.getInstance();
@@ -59,8 +59,8 @@ public class CreateReminderActivity extends AppCompatActivity {
                 timeOff9.set(Calendar.MINUTE, min);
                 timeOff9.set(Calendar.SECOND, 0);
 
-                Toast.makeText(getApplicationContext(),"Day = "+timeOff9.get(Calendar.DAY_OF_MONTH)+" Mon="+timeOff9.get(Calendar.MONTH)+" Year="+timeOff9.get(Calendar.YEAR),Toast.LENGTH_LONG).show();
-                Toast.makeText(getApplicationContext(),"Reminder Created",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Day = "+timeOff9.get(Calendar.DAY_OF_MONTH)+" Mth="+(timeOff9.get(Calendar.MONTH)+1)+" Year="+timeOff9.get(Calendar.YEAR),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Reminder Updated",Toast.LENGTH_LONG).show();
 //set that timer as a RTC Wakeup to alarm manager object
                 alarmMgr0.set(AlarmManager.RTC_WAKEUP, timeOff9.getTimeInMillis(), pi);
                 Intent intent = new Intent(getApplicationContext(), ReminderActivity.class);
@@ -82,6 +82,10 @@ public class CreateReminderActivity extends AppCompatActivity {
 
                 finish();
             }
-            });
+        });
     }
+
+
+
+
 }

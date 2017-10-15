@@ -17,6 +17,14 @@
         android:layout_height="wrap_content" />
 
     <EditText
+        android:id="@+id/ReTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Reminder Title" />
+
+    <EditText
         android:id="@+id/ReDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

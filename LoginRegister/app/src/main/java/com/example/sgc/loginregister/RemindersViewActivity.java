@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -151,7 +152,19 @@ public class RemindersViewActivity extends AppCompatActivity {
 
     public ArrayList<Reminder> generateData() {
         ArrayList<Reminder> reminders = new ArrayList<Reminder>();
-
+        ReminderDBHandler ReDB = new ReminderDBHandler(getApplicationContext());
+        String UserName = getIntent().getStringExtra("User ID");
+        UserName=UserName.trim();
+        Cursor cursor =ReDB.getDBEntryForUser(UserName);
+        cursor.moveToFirst();
+        if(cursor.getCount() !=0) {
+            int i = 0;
+            while (!cursor.isAfterLast()) {
+                Reminder temp = new Reminder(cursor.getInt(0), getApplicationContext());
+                reminders.add(temp);
+                cursor.moveToNext();
+            }
+        }
 
         return reminders;
 

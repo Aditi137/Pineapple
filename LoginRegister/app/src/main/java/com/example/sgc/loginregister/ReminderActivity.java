@@ -9,7 +9,7 @@ import android.widget.Button;
 /**
  * Created by jon92 on 24/9/2017.
  */
-
+//Obsolete to be deleted
 public class ReminderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -90,13 +90,13 @@ public class CreateReminderActivity extends AppCompatActivity {
                 if(Test== true)
                 {
                     Toast.makeText(getApplicationContext(),"Reminder Created",Toast.LENGTH_LONG).show();
-                    Toast.makeText(getApplicationContext(),"ID"+Rid,Toast.LENGTH_LONG).show();
+
                 }
 
                 Intent intent = new Intent(getApplicationContext(), ReminderActivity.class);
                 //startActivity(intent);
 
-                String time;
+                //String time;
                 String date;
                 String title = event_details;
 

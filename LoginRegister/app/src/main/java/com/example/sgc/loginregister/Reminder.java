@@ -1,15 +1,22 @@
 package com.example.sgc.loginregister;
 
 
+import android.content.Context;
+import android.database.Cursor;
+
 /**
  * Created by YY on 14/10/2017.
  */
 
-public class Reminder {
+public class Reminder{
+    private int Rid;
+
     private String title;
+    private String details,setby,userid;
     private String date;
     private String time;
     private String status;
+
 
     public Reminder(String title, String date, String time, String status) {
         super();
@@ -17,13 +24,37 @@ public class Reminder {
         this.date = date;
         this.time = time;
         this.status = status;
+
+
+    }
+    public Reminder(int id,Context context)
+    {
+        super();
+
+        Rid=id;
+
+        ReminderDBHandler ReDB =new ReminderDBHandler(context);
+        Cursor temp = ReDB.getDBEntry(Rid);
+        temp.moveToFirst();
+        date=temp.getString(1);
+        time=temp.getString(2);
+        title=temp.getString(3);
+        details=temp.getString(4);
+        status=temp.getString(5);
+        userid=temp.getString(6);
+        setby=temp.getString(7);
+
+
+
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title,Context context) {
+        ReminderDBHandler ReDB =new ReminderDBHandler(context);
+        ReDB.updateEntry(Rid,"Title",title);
         this.title = title;
     }
 
@@ -31,7 +62,9 @@ public class Reminder {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(String date,Context context) {
+        ReminderDBHandler ReDB =new ReminderDBHandler(context);
+        ReDB.updateEntry(Rid,"Date",date);
         this.date = date;
     }
 
@@ -40,7 +73,9 @@ public class Reminder {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(String time,Context context) {
+        ReminderDBHandler ReDB =new ReminderDBHandler(context);
+        ReDB.updateEntry(Rid,"Time",time);
         this.time = time;
     }
 
@@ -48,9 +83,30 @@ public class Reminder {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(String status,Context context) {
+        ReminderDBHandler ReDB =new ReminderDBHandler(context);
+        ReDB.updateEntry(Rid,"Status",status);
         this.status = status;
     }
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details,Context context){
+        ReminderDBHandler ReDB =new ReminderDBHandler(context);
+        ReDB.updateEntry(Rid,"Detail",status);
+        this.details = details;
+    }
+    public String getUserid() {
+        return userid;
+    }
+    public String getSetBy() {
+        return setby;
+    }
+    public int getID() {
+        return Rid;
+    }
+
 
 
 }

@@ -21,7 +21,7 @@ public class UserAreaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(getApplicationContext(), ReminderActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RemindersViewActivity.class);
                 intent.putExtra("User ID",UserName);
                 startActivity(intent);
             }

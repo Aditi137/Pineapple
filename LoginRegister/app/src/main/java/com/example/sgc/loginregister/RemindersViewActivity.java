@@ -2,31 +2,21 @@ package com.example.sgc.loginregister;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.MainThread;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by YY on 11/10/2017.
@@ -235,6 +225,9 @@ public class RemindersViewActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.btn_add_reminder:
                 Intent intent = new Intent(getApplicationContext(), CreateReminderActivity.class);
+                String UserName = getIntent().getStringExtra("User ID");
+                intent.putExtra("User ID",UserName);
+                intent.putExtra("Set By",UserName);
                 startActivityForResult(intent, ADD_REMINDER);
                 return true;
         }

@@ -72,4 +72,24 @@ public class ReminderDBHandler extends SQLiteOpenHelper {
         cursor.moveToLast();
         return cursor.getInt(0);
     }
+    public Cursor getDBEntry(int id)//Get the entry based on Reminder ID
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = "SELECT * FROM ReminderTable WHERE "+Col1+"='" +id+ "';";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        return cursor;
+    }
+    public Cursor getDBEntryForUser(String id)//Use to get all reminders for that specifc ID
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = "SELECT * FROM ReminderTable WHERE "+Col7+"='" +id+ "';";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        return cursor;
+    }
+    public void updateEntry(int id,String col , String update)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE ReminderTable SET "+col+" = '"+update+"' WHERE "+Col1+" = '"+id+"';");
+
+    }
 }

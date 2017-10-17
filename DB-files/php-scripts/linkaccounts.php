@@ -7,7 +7,7 @@
   $user_check = mysqli_query($conn, $get_user_id);
   if(mysqli_num_rows($user_check) > 0){
     $query = "insert into Relations (s_id,u_id,confirmed)
-              values ('$user_id','$supervisor_id','NO');";
+              values ('$supervisor_id','$user_id','NO');";
 
     if ($result = mysqli_query($conn,$query)){
       echo "Success";

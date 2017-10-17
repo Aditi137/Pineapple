@@ -12,5 +12,7 @@
     if ($result = mysqli_query($conn,$query)){
       echo "Success";
     }
+  }else{
+    echo "User not found";
   }
  ?>

@@ -59,8 +59,15 @@ public class LoginActivity extends AppCompatActivity {
         editor.apply();
 
         //Temp Disabled to bypass db
-        //DatabaseWorker dbWorker = new DatabaseWorker(this);
-        //dbWorker.execute(type,username,password);
+        DatabaseWorker dbWorker = new DatabaseWorker(this);
+        dbWorker.execute(type,username,password);
+
+        /*
+
+
+        //Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
+        //intent.putExtra("User ID",username);
+        //LoginActivity.this.startActivity(intent);
 
         //0 for supervisor
         if(accounttype == "0"){
@@ -75,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra("User ID",username);
         //intent.putExtra("Account Type", accounttype);
         LoginActivity.this.startActivity(intent);
+        */
     }
 
 }

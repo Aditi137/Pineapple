@@ -40,11 +40,14 @@ public class LinkAccounts extends AppCompatActivity {
                     public void onResponse(String response){
                         try{
                             if (response.trim().equals("Success")){
-                                Toast.makeText(getApplicationContext(),"LYCKAT",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"Request sent",Toast.LENGTH_LONG).show();
 
+                            }else if (response.trim().equals("User not found")){
+                                Toast.makeText(getApplicationContext(),"There is no such user... Try again",Toast.LENGTH_LONG).show();
                             }else{
-                                Toast.makeText(getApplicationContext(),"HELVETE",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"You have already sent a request to that user",Toast.LENGTH_LONG).show();
                             }
+
                         }catch(Error e){
                             e.printStackTrace();
                         }

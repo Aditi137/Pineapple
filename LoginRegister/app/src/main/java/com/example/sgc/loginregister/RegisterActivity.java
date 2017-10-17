@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
                 final String email = etEmail.getText().toString();
                 final String username = etUserName.getText().toString();
                 final String password = etPassword.getText().toString();
-                String account_type="0";
+                String account_type="XX";
 
                 if (supervisor.isChecked()){
                     account_type="1";
@@ -88,9 +88,16 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 };
 
-                RegisterRequest registerRequest =  new RegisterRequest(name, email, username, password,account_type, listener);
-                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
-                queue.add(registerRequest);
+                if ((name.length()<1||email.length()<1||username.length()<1||password.length()<1||account_type.length()==2)){
+                    builder.setMessage("Please make sure to fill in all information");
+                    builder.setPositiveButton("Ok",null);
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }else {
+                    RegisterRequest registerRequest = new RegisterRequest(name, email, username, password, account_type, listener);
+                    RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+                    queue.add(registerRequest);
+                }
 
             }
         });

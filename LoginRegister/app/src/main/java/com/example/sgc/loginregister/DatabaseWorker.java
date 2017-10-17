@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -106,11 +108,16 @@ public class DatabaseWorker extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String response) {
-        if(response.equals("Success")) {
+        if(response.equals("0")) {
+            //Toast.makeText(context,"SUPERVISEE",Toast.LENGTH_LONG).show();
             Intent userAreaIntent = new Intent(DatabaseWorker.context, UserAreaActivity.class);
             DatabaseWorker.context.startActivity(userAreaIntent);
 
 
+        }else if (response.equals("1")) {
+            //Toast.makeText(context,"SUPERVISOR",Toast.LENGTH_LONG).show();
+            // TODO: 2017-10-17
+            //Insert Supervisor main screen
         }else if (response.equals("pwreset")){
             alertDialog.setTitle("Notification");
             alertDialog.setMessage("An email has been sent to you with instructions on " +

@@ -57,12 +57,12 @@ public class LoginActivity extends AppCompatActivity {
         editor.apply();
 
         //Temp Disabled to bypass db
-        //DatabaseWorker dbWorker = new DatabaseWorker(this);
-        //dbWorker.execute(type,username,password);
+        DatabaseWorker dbWorker = new DatabaseWorker(this);
+        dbWorker.execute(type,username,password);
 
-        Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
-        intent.putExtra("User ID",username);
-        LoginActivity.this.startActivity(intent);
+        //Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
+        //intent.putExtra("User ID",username);
+        //LoginActivity.this.startActivity(intent);
     }
 
 }

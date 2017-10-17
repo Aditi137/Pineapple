@@ -27,6 +27,7 @@ public class UserAreaActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(getApplicationContext(), RemindersViewActivity.class);
                 intent.putExtra("User ID",UserName);
+                intent.putExtra("Set By",UserName);
                 startActivity(intent);
             }
         });

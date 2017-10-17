@@ -20,25 +20,44 @@ import android.widget.Toast;
  */
 
 public class EditReminderActivity extends AppCompatActivity {
+    @RequiresApi(api = Build.VERSION_CODES.M)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_reminder);
         Button create= (Button) findViewById(R.id.remind_update);
+        //String UserName = getIntent().getStringExtra("User ID");
+        final int ReID = getIntent().getIntExtra("ReID",0);
+        final Reminder Re = new Reminder(ReID,getApplicationContext());
         final EditText date1 =(EditText) findViewById(R.id.date1);
-
+        final EditText title=(EditText) findViewById(R.id.ReTitle);
         final EditText details=(EditText) findViewById(R.id.ReDetails);
         final TimePicker tp=(TimePicker) findViewById(R.id.timePicker);
+        date1.setText(Re.getDate());
+        String tempTime = Re.getTime();
+        String[] tempSep = tempTime.split(":");
+        tp.setHour(Integer.parseInt(tempSep[0]));
+        tp.setMinute(Integer.parseInt(tempSep[1]));
+        details.setText(Re.getDetails());
+        title.setText(Re.getTitle());
+        MyEditTextDatePicker temp = new MyEditTextDatePicker(this,R.id.date1);
+        final String[] Status_type= {"A&R Set","R Set","Ack","Not Ack"};
         create.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v)
             {
                 //On click goes to the update reminder in the alarm system
+                String UserName = getIntent().getStringExtra("User ID");//Gets message for user ID
+                UserName=UserName.trim();
+                String setBy = getIntent().getStringExtra("Set By");// Message for set by
+                setBy=setBy.trim();
+
                 int hour = tp.getHour();
                 int min=tp.getMinute();
                 AlarmManager alarmMgr0 = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
                 String temp_date = date1.getText().toString();
+                temp_date=temp_date.trim();
                 String[] separated2 = temp_date.split("/");
                 int day = Integer.parseInt(separated2[0]);
                 int month = Integer.parseInt(separated2[1]);
@@ -46,31 +65,49 @@ public class EditReminderActivity extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(),"Day = "+day+" Mon="+month+" Year="+year,Toast.LENGTH_LONG).show();
 
                 String event_details= details.getText().toString();
-                //Add DB statements to store data
+                String event_title=title.getText().toString();
 
-                Intent i = new Intent(EditReminderActivity.this,Alarm.class);
-                PendingIntent pi =PendingIntent.getBroadcast(getApplicationContext(),0,i,0);//Add in the ID
+                if(UserName.equals(setBy))//This is for personal reminders. May have to add an additional message for type
+                {
 
-                Calendar timeOff9 = Calendar.getInstance();
-                timeOff9.set(Calendar.YEAR,year);
-                timeOff9.set(Calendar.MONTH,month-1);//Calendars months are numbered 0-11 therefore -1 to get correct month
-                timeOff9.set(Calendar.DAY_OF_MONTH,day);
-                timeOff9.set(Calendar.HOUR_OF_DAY, hour);
-                timeOff9.set(Calendar.MINUTE, min);
-                timeOff9.set(Calendar.SECOND, 0);
+                    Re.setStatus(Status_type[0]);
+                    Intent i = new Intent(EditReminderActivity.this,Alarm.class);
+                    i.putExtra("User ID",UserName);
+                    i.putExtra("ReID",ReID);
+                    PendingIntent pi =PendingIntent.getBroadcast(getApplicationContext(),ReID,i,0);//Add in the ID
 
-                Toast.makeText(getApplicationContext(),"Day = "+timeOff9.get(Calendar.DAY_OF_MONTH)+" Mth="+(timeOff9.get(Calendar.MONTH)+1)+" Year="+timeOff9.get(Calendar.YEAR),Toast.LENGTH_LONG).show();
+                    Calendar timeOff9 = Calendar.getInstance();
+                    timeOff9.set(Calendar.YEAR,year);
+                    timeOff9.set(Calendar.MONTH,month-1);//Calendars months are numbered 0-11 therefore -1 to get correct month
+                    timeOff9.set(Calendar.DAY_OF_MONTH,day);
+                    timeOff9.set(Calendar.HOUR_OF_DAY, hour);
+                    timeOff9.set(Calendar.MINUTE, min);
+                    timeOff9.set(Calendar.SECOND, 0);
+                    alarmMgr0.set(AlarmManager.RTC_WAKEUP, timeOff9.getTimeInMillis(), pi);
+                    Toast.makeText(getApplicationContext(),"Alarm Created",Toast.LENGTH_LONG).show();
+                }
+                else// for reminders set by supervisor
+                {
+                    Re.setStatus(Status_type[1]);
+                }
+
+                String time = hour +":"+min;
+                Re.setDate(temp_date);
+                Re.setDetails(event_details);
+                Re.setTime(time);
+                Re.setTitle(event_title);
+
                 Toast.makeText(getApplicationContext(),"Reminder Updated",Toast.LENGTH_LONG).show();
 //set that timer as a RTC Wakeup to alarm manager object
-                alarmMgr0.set(AlarmManager.RTC_WAKEUP, timeOff9.getTimeInMillis(), pi);
-                Intent intent = new Intent(getApplicationContext(), ReminderActivity.class);
+
+                //Intent intent = new Intent(getApplicationContext(), ReminderActivity.class);
                 //startActivity(intent);
 
-                String time;
+
                 String date;
                 String title = event_details;
 
-                time = String.valueOf(hour) + ":" + String.valueOf(min);
+                time = String.valueOf(hour) + ":" + String.valueOf(min);//No need to use this
                 date = String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
 
                 Intent data = new Intent();

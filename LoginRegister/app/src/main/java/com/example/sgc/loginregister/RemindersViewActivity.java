@@ -68,6 +68,8 @@ public class RemindersViewActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Log.d("check", String.valueOf(temp_pos));
+                                Reminder temp = adapter.getItem(temp_pos);
+                                temp.deleteReminder();
                                 adapter.remove(adapter.getItem(temp_pos));
                                 adapter.notifyDataSetChanged();
                                 Toast.makeText(RemindersViewActivity.this, "Reminder deleted.", Toast.LENGTH_LONG).show();
@@ -82,8 +84,13 @@ public class RemindersViewActivity extends AppCompatActivity {
                     case 1:
                         // Edit reminder
 
-                        adapter.getItem(temp_pos);
+                        Reminder temp =adapter.getItem(temp_pos);
+
                         Intent intent = new Intent(getApplicationContext(), EditReminderActivity.class);
+                        String UserName = getIntent().getStringExtra("User ID");
+                        intent.putExtra("ReID",temp.getID());
+                        intent.putExtra("User ID",UserName);
+                        intent.putExtra("Set By",temp.getSetBy());
                         startActivityForResult(intent, EDIT_REMINDER);
 
 
@@ -127,16 +134,18 @@ public class RemindersViewActivity extends AppCompatActivity {
         ReminderDBHandler ReDB = new ReminderDBHandler(getApplicationContext());
         //Run once then delete the Start to end part
         //Start
-        ReDB.addCol("Status","TEXT");
+        /*ReDB.addCol("Status","TEXT");
         ReDB.addCol("UserId","TEXT");
-        ReDB.addCol("SetBy","TEXT");
+        ReDB.addCol("SetBy","TEXT");*/
         //End
+
         String UserName = getIntent().getStringExtra("User ID");
         UserName=UserName.trim();
         Cursor cursor =ReDB.getDBEntryForUser(UserName);
         cursor.moveToFirst();
+        cursor.moveToFirst();
         if(cursor.getCount() !=0) {
-            int i = 0;
+
             while (!cursor.isAfterLast()) {
                 Reminder temp = new Reminder(cursor.getInt(0), getApplicationContext());
                 reminders.add(temp);
@@ -217,8 +226,9 @@ public class RemindersViewActivity extends AppCompatActivity {
             case R.id.btn_add_reminder:
                 Intent intent = new Intent(getApplicationContext(), CreateReminderActivity.class);
                 String UserName = getIntent().getStringExtra("User ID");
+                String SetBy=getIntent().getStringExtra("Set By");
                 intent.putExtra("User ID",UserName);
-                intent.putExtra("Set By",UserName);
+                intent.putExtra("Set By",SetBy);
                 startActivityForResult(intent, ADD_REMINDER);
                 return true;
         }

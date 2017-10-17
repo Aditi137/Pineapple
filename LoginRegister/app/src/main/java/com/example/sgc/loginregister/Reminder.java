@@ -16,6 +16,7 @@ public class Reminder{
     private String date;
     private String time;
     private String status;
+    Context context1;
 
 
     public Reminder(String title, String date, String time, String status) {
@@ -32,7 +33,7 @@ public class Reminder{
         super();
 
         Rid=id;
-
+        context1=context;
         ReminderDBHandler ReDB =new ReminderDBHandler(context);
         Cursor temp = ReDB.getDBEntry(Rid);
         temp.moveToFirst();
@@ -52,8 +53,8 @@ public class Reminder{
         return title;
     }
 
-    public void setTitle(String title,Context context) {
-        ReminderDBHandler ReDB =new ReminderDBHandler(context);
+    public void setTitle(String title) {
+        ReminderDBHandler ReDB =new ReminderDBHandler(context1);
         ReDB.updateEntry(Rid,"Title",title);
         this.title = title;
     }
@@ -62,8 +63,8 @@ public class Reminder{
         return date;
     }
 
-    public void setDate(String date,Context context) {
-        ReminderDBHandler ReDB =new ReminderDBHandler(context);
+    public void setDate(String date) {
+        ReminderDBHandler ReDB =new ReminderDBHandler(context1);
         ReDB.updateEntry(Rid,"Date",date);
         this.date = date;
     }
@@ -73,8 +74,8 @@ public class Reminder{
         return time;
     }
 
-    public void setTime(String time,Context context) {
-        ReminderDBHandler ReDB =new ReminderDBHandler(context);
+    public void setTime(String time) {
+        ReminderDBHandler ReDB =new ReminderDBHandler(context1);
         ReDB.updateEntry(Rid,"Time",time);
         this.time = time;
     }
@@ -83,8 +84,8 @@ public class Reminder{
         return status;
     }
 
-    public void setStatus(String status,Context context) {
-        ReminderDBHandler ReDB =new ReminderDBHandler(context);
+    public void setStatus(String status) {
+        ReminderDBHandler ReDB =new ReminderDBHandler(context1);
         ReDB.updateEntry(Rid,"Status",status);
         this.status = status;
     }
@@ -92,8 +93,8 @@ public class Reminder{
         return details;
     }
 
-    public void setDetails(String details,Context context){
-        ReminderDBHandler ReDB =new ReminderDBHandler(context);
+    public void setDetails(String details){
+        ReminderDBHandler ReDB =new ReminderDBHandler(context1);
         ReDB.updateEntry(Rid,"Detail",status);
         this.details = details;
     }
@@ -105,6 +106,12 @@ public class Reminder{
     }
     public int getID() {
         return Rid;
+    }
+
+    public void deleteReminder()
+    {
+        ReminderDBHandler ReDB =new ReminderDBHandler(context1);
+        ReDB.DeleteEntry(Rid);
     }
 
 

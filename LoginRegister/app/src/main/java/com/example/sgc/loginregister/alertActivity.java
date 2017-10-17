@@ -44,7 +44,7 @@ public class alertActivity extends AppCompatActivity {
                 PendingIntent pi =PendingIntent.getBroadcast(getApplicationContext(),0,i,0);
                 AlarmManager am =(AlarmManager) getSystemService(ALARM_SERVICE);
                 am.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+5*1000,pi);
-                temp.setStatus("Not Ack",getApplicationContext());
+                temp.setStatus("Not Ack");
                 Intent intent = new Intent(getApplicationContext(), UserAreaActivity.class);//add destination here
                 startActivity(intent);
             }
@@ -54,7 +54,7 @@ public class alertActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getApplicationContext(), UserAreaActivity.class);//add destination here
-                temp.setStatus("Ack",getApplicationContext());
+                temp.setStatus("Ack");
                 intent.putExtra("User ID",UserName);
                 startActivity(intent);
 

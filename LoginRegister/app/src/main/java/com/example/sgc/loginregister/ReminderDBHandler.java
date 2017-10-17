@@ -63,6 +63,7 @@ public class ReminderDBHandler extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("ALTER TABLE "+ TABLE_NAME+" ADD COLUMN "+name +" "+type);
+
     }
     public int getLastID()
     {
@@ -70,6 +71,7 @@ public class ReminderDBHandler extends SQLiteOpenHelper {
         String selectQuery = "SELECT "+Col1+" FROM ReminderTable ORDER BY "+Col1+" DESC LIMIT 1;";
         Cursor cursor = db.rawQuery(selectQuery, null);
         cursor.moveToLast();
+
         return cursor.getInt(0);
     }
     public Cursor getDBEntry(int id)//Get the entry based on Reminder ID
@@ -77,6 +79,7 @@ public class ReminderDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery = "SELECT * FROM ReminderTable WHERE "+Col1+"='" +id+ "';";
         Cursor cursor = db.rawQuery(selectQuery, null);
+
         return cursor;
     }
     public Cursor getDBEntryForUser(String id)//Use to get all reminders for that specifc ID
@@ -84,6 +87,7 @@ public class ReminderDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery = "SELECT * FROM ReminderTable WHERE "+Col7+"='" +id+ "';";
         Cursor cursor = db.rawQuery(selectQuery, null);
+
         return cursor;
     }
     public void updateEntry(int id,String col , String update)
@@ -91,5 +95,10 @@ public class ReminderDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE ReminderTable SET "+col+" = '"+update+"' WHERE "+Col1+" = '"+id+"';");
 
+    }
+    public void DeleteEntry(int id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM ReminderTable WHERE "+Col1+" = '"+id+"';");
     }
 }

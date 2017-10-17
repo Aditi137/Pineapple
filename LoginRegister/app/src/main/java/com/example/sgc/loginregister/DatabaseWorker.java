@@ -126,8 +126,8 @@ public class DatabaseWorker extends AsyncTask<String,Void,String> {
 
         }else if (response.equals("1")) {
             //Toast.makeText(context,"SUPERVISOR",Toast.LENGTH_LONG).show();
-            // TODO: 2017-10-17
-            //Insert Supervisor main screen
+            Intent userAreaIntent = new Intent(DatabaseWorker.context, SuperviseeMain.class);
+            DatabaseWorker.context.startActivity(userAreaIntent);
         }else if (response.equals("pwreset")){
             alertDialog.setTitle("Notification");
             alertDialog.setMessage("An email has been sent to you with instructions on " +

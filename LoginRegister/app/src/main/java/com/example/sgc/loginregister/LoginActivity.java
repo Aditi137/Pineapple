@@ -49,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
         String username = etUserName.getText().toString();
         String password = etPassword.getText().toString();
         String type = "Login";
-        String accounttype = "";
 
 
         SharedPreferences sharedPref = getSharedPreferences("userID", Context.MODE_PRIVATE);

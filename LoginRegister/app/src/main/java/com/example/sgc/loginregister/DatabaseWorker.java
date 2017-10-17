@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -42,6 +41,12 @@ public class DatabaseWorker extends AsyncTask<String,Void,String> {
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
+
+                //Get Account Type
+                /*
+                InputStream is = new BufferedInputStream(httpURLConnection.getInputStream());
+                String s = readStream(is);*/
+
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String post_data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&" +
@@ -59,7 +64,12 @@ public class DatabaseWorker extends AsyncTask<String,Void,String> {
                 }
                 bufferedReader.close();
                 inputStream.close();
+
+
+
                 httpURLConnection.disconnect();
+
+
                 return response;
 
             } catch (IOException e) {

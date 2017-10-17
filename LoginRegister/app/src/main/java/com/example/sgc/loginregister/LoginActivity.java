@@ -49,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         String username = etUserName.getText().toString();
         String password = etPassword.getText().toString();
         String type = "Login";
+        String accounttype = "";
+
 
         SharedPreferences sharedPref = getSharedPreferences("userID", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -60,9 +62,27 @@ public class LoginActivity extends AppCompatActivity {
         DatabaseWorker dbWorker = new DatabaseWorker(this);
         dbWorker.execute(type,username,password);
 
+        /*
+
+
         //Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
         //intent.putExtra("User ID",username);
         //LoginActivity.this.startActivity(intent);
+
+        //0 for supervisor
+        if(accounttype == "0"){
+            Intent intent = new Intent(LoginActivity.this, SuperviseeMain.class);
+
+        }
+        else{
+            Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
+        }
+
+
+        intent.putExtra("User ID",username);
+        //intent.putExtra("Account Type", accounttype);
+        LoginActivity.this.startActivity(intent);
+        */
     }
 
 }

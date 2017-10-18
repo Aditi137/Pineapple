@@ -64,6 +64,8 @@ public class LoginActivity extends AppCompatActivity {
         /*
 
 
+
+
         //Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
         //intent.putExtra("User ID",username);
         //LoginActivity.this.startActivity(intent);

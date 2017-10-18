@@ -30,8 +30,11 @@ public class DatabaseWorker extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... strings) {
         String type = strings[0];
-        String login_url = "http://10.0.2.2:8888/pineapple/login.php";
-        String resetpw_url = "http://10.0.2.2:8888/pineapple/resetpw.php";
+        //String login_url = "http://10.0.2.2:8888/pineapple/login.php";
+        //String resetpw_url = "http://10.0.2.2:8888/pineapple/resetpw.php";
+
+        String login_url = "http://10.0.2.2/pineapple/login.php";
+        String resetpw_url = "http://10.0.2.2/pineapple/resetpw.php";
         if(type.equals("Login")) {
             try {
                 String username = strings[1];

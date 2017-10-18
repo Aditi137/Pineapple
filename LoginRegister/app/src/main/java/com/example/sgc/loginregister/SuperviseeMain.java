@@ -1,14 +1,15 @@
 package com.example.sgc.loginregister;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 //should be named SupervisorMain
-public class SuperviseeMain extends AppCompatActivity {
+public class SuperviseeMain extends AppCompatActivity {//Might need to change name. this is supervisor homepage
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +20,9 @@ public class SuperviseeMain extends AppCompatActivity {
         Button SuperviseeList =(Button) findViewById(R.id.bSuperviseeList);
 
         Button addSupervisee = (Button) findViewById(R.id.bAddSupervisee);
+        SharedPreferences sharedPref = getSharedPreferences("userID", Context.MODE_PRIVATE);
+        final String UserName = sharedPref.getString("username",null);
 
-        final String UserName = getIntent().getStringExtra("User ID");
         //Toast.makeText(getApplicationContext(),UserName,Toast.LENGTH_LONG).show();
 
 
@@ -28,7 +30,7 @@ public class SuperviseeMain extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(getApplicationContext(), ReminderActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RemindersViewActivity.class);
                 intent.putExtra("User ID",UserName);
                 intent.putExtra("Set By",UserName);
                 startActivity(intent);

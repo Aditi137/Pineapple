@@ -7,10 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -29,7 +27,7 @@ public class UserAreaActivity extends AppCompatActivity {
         my_username = sharedPref.getString("username",null);
 
 
-        final String UserName = getIntent().getStringExtra("User ID");
+        final String UserName = sharedPref.getString("username",null);
 
 
         reminder.setOnClickListener(new View.OnClickListener() {

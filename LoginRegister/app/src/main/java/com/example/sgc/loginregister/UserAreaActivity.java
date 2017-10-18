@@ -30,7 +30,6 @@ public class UserAreaActivity extends AppCompatActivity {
 
 
         final String UserName = getIntent().getStringExtra("User ID");
-        //Toast.makeText(getApplicationContext(),UserName,Toast.LENGTH_LONG).show();
 
 
         reminder.setOnClickListener(new View.OnClickListener() {

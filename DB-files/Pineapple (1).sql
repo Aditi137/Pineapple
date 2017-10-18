@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Oct 15, 2017 at 12:42 PM
+-- Generation Time: Oct 18, 2017 at 08:47 AM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.6
 
@@ -39,8 +39,10 @@ CREATE TABLE `Accounts` (
 --
 
 INSERT INTO `Accounts` (`name`, `email`, `id`, `password`, `account_type`) VALUES
+('', '', '', '', '0'),
 ('Madeleine', 'mgartz@kth.se', '1234', 'ntu', '0'),
 ('Filip', 'filipjad@kth.se', '1337', 'hejhej', '0'),
+('Filip', 'abc@gmail.com', 'fille123', '123456', '0'),
 ('Helge Bengtsson', 'hej@123.se', 'HelgeZZ', 'komohjaelpmig', '1'),
 ('made', 'mad@d.e', 'madekung', 'hejhej', '0');
 
@@ -61,10 +63,10 @@ CREATE TABLE `Relations` (
 --
 
 INSERT INTO `Relations` (`s_id`, `u_id`, `confirmed`) VALUES
-('1337', '1234', 'YES'),
-('madekung', '1337', 'no'),
-('HelgeZZ', '1337', 'NO'),
-('HelgeZZ', '1337', 'NO');
+('HelgeZZ', '1337', 'YES'),
+('HelgeZZ', 'fille123', 'YES'),
+('HelgeZZ', 'madekung', 'NO'),
+('madekung', '1337', 'YES');
 
 -- --------------------------------------------------------
 
@@ -90,6 +92,12 @@ CREATE TABLE `Reminders` (
 ALTER TABLE `Accounts`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `Relations`
+--
+ALTER TABLE `Relations`
+  ADD UNIQUE KEY `s_id` (`s_id`,`u_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

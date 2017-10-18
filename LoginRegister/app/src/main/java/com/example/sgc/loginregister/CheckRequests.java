@@ -21,7 +21,6 @@ public class CheckRequests extends StringRequest{
         params.put("username", username);
         params.put("supervisor_username", supervisor);
 
-
     }
 
     @Override

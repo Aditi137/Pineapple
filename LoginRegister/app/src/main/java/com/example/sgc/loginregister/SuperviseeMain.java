@@ -21,7 +21,7 @@ public class SuperviseeMain extends AppCompatActivity {
         Button addSupervisee = (Button) findViewById(R.id.bAddSupervisee);
 
         final String UserName = getIntent().getStringExtra("User ID");
-        Toast.makeText(getApplicationContext(),UserName,Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),UserName,Toast.LENGTH_LONG).show();
 
 
         PersonalReminders.setOnClickListener(new View.OnClickListener() {

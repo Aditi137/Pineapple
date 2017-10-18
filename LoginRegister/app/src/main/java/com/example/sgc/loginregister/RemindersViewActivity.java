@@ -59,25 +59,31 @@ public class RemindersViewActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:
-                        // Delete reminder
+                        try {
+                            // Delete reminder
 
-                        cfmDel = new AlertDialog.Builder(RemindersViewActivity.this);
-                        cfmDel.setCancelable(true);
-                        cfmDel.setTitle("Confirm delete reminder?");
-                        cfmDel.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Log.d("check", String.valueOf(temp_pos));
-                                Reminder temp = adapter.getItem(temp_pos);
-                                temp.deleteReminder();
-                                adapter.remove(adapter.getItem(temp_pos));
-                                adapter.notifyDataSetChanged();
-                                Toast.makeText(RemindersViewActivity.this, "Reminder deleted.", Toast.LENGTH_LONG).show();
+                            cfmDel = new AlertDialog.Builder(RemindersViewActivity.this);
+                            cfmDel.setCancelable(true);
+                            cfmDel.setTitle("Confirm delete reminder?");
+                            cfmDel.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Log.d("check", String.valueOf(temp_pos));
+                                    Reminder temp = adapter.getItem(temp_pos);
+                                    temp.deleteReminder();
+                                    adapter.remove(adapter.getItem(temp_pos));
+                                    adapter.notifyDataSetChanged();
+                                    Toast.makeText(RemindersViewActivity.this, "Reminder deleted.", Toast.LENGTH_LONG).show();
 
-                            }
-                        });
-                        cfmDel.setNegativeButton("No", null);
-                        cfmDel.show();
+                                }
+                            });
+                            cfmDel.setNegativeButton("No", null);
+                            cfmDel.show();
+                        }
+                        catch (NullPointerException npe) {
+                            npe.printStackTrace();
+                            Toast.makeText(RemindersViewActivity.this, "Reminder does not exists.", Toast.LENGTH_LONG).show();
+                        }
 
                         break;
 
@@ -92,8 +98,6 @@ public class RemindersViewActivity extends AppCompatActivity {
                         intent.putExtra("User ID",UserName);
                         intent.putExtra("Set By",temp.getSetBy());
                         startActivityForResult(intent, EDIT_REMINDER);
-
-
 
                         break;
 
@@ -115,7 +119,6 @@ public class RemindersViewActivity extends AppCompatActivity {
 
         Log.d("did","this");
 
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -123,9 +126,6 @@ public class RemindersViewActivity extends AppCompatActivity {
                 selOptions.show();
             }
         });
-
-
-
 
     }
 
@@ -210,7 +210,6 @@ public class RemindersViewActivity extends AppCompatActivity {
             default:
                 break;
         }
-
 
     }
 

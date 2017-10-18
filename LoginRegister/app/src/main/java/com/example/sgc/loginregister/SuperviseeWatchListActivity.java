@@ -43,6 +43,8 @@ public class SuperviseeWatchListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supervisee_watch_list);
+
+
         SuperviseeList = (ListView) findViewById(R.id.lvSuperviseeList);
         SharedPreferences sharedPref = getSharedPreferences("userID", Context.MODE_PRIVATE);
         String my_username = sharedPref.getString("username",null);
@@ -58,11 +60,14 @@ public class SuperviseeWatchListActivity extends AppCompatActivity {
 
                             for(int i=0;i<array.length();i++){
                                 JSONObject user = array.getJSONObject(i);
-                                temp += user.getString("u_id")+":";
+                                String user_info = "ID: " + user.getString("id") +"\nName: " + user.getString("name")
+                                                +"\nEmail: " + user.getString("email");
+
+                                temp += user_info+";";
 
 
                             }
-                            arr = temp.split(":");
+                            arr = temp.split(";");
                             SuperviseeList.setAdapter(new ArrayAdapter<String>(SuperviseeWatchListActivity.this, android.R.layout.simple_list_item_1, arr));
 
                             SuperviseeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

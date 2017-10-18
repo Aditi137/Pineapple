@@ -1,6 +1,8 @@
 package com.example.sgc.loginregister;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,6 +19,14 @@ public class ReminderActivity extends AppCompatActivity {
         Button createNew =(Button) findViewById(R.id.create_app);
         Button viewList =(Button) findViewById(R.id.app_list);
         final String UserName = getIntent().getStringExtra("User ID");
+
+
+        // HOW TO GET USER ID
+        SharedPreferences sharedPref = getSharedPreferences("userID", Context.MODE_PRIVATE);
+        String my_username = sharedPref.getString("username",null);
+
+
+
         createNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)

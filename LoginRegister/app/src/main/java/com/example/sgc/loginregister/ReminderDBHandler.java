@@ -104,7 +104,11 @@ public class ReminderDBHandler extends SQLiteOpenHelper {
     }
     public void DeleteEntry(int id)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM ReminderTable WHERE "+Col1+" = '"+id+"';");
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL("DELETE FROM ReminderTable WHERE " + Col1 + " = '" + id + "';");
+        }catch(Error e){
+            e.printStackTrace();
+        }
     }
 }

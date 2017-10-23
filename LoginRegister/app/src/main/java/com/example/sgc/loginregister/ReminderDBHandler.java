@@ -32,6 +32,9 @@ public class ReminderDBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table "+ TABLE_NAME+ " (" + Col1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+Col2+" TEXT, "
                 +Col3+" TEXT, "+Col4+" TEXT, "+Col5 +" TEXT)");
+        this.addCol("Status","TEXT");
+        this.addCol("UserId","TEXT");
+        this.addCol("SetBy","TEXT");
     }
 
     @Override
@@ -70,9 +73,12 @@ public class ReminderDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String selectQuery = "SELECT "+Col1+" FROM ReminderTable ORDER BY "+Col1+" DESC LIMIT 1;";
         Cursor cursor = db.rawQuery(selectQuery, null);
-        cursor.moveToLast();
-
-        return cursor.getInt(0);
+        if(cursor.getCount()!=0)
+        {
+            cursor.moveToLast();
+            return cursor.getInt(0);
+        }
+       return 0;
     }
     public Cursor getDBEntry(int id)//Get the entry based on Reminder ID
     {

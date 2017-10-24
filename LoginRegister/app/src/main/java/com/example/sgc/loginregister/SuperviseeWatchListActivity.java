@@ -1,6 +1,8 @@
 package com.example.sgc.loginregister;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.StrictMode;
@@ -73,8 +75,26 @@ public class SuperviseeWatchListActivity extends AppCompatActivity {
                             SuperviseeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    Intent intent = new Intent(getApplicationContext(), ReminderActivity.class);
-                                    startActivity(intent);
+                                    new AlertDialog.Builder(SuperviseeWatchListActivity.this)
+                                            .setCancelable(true)
+                                            .setTitle("Select options")
+                                            .setItems(new CharSequence[]{"View reminders", "Create reminders", "Close"}, new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    switch (which) {
+                                                        case 0:
+                                                            Intent intent_view = new Intent(getApplicationContext(), RemindersViewActivity.class);
+                                                            startActivity(intent_view);
+                                                            break;
+                                                        case 1:
+                                                            Intent intent_create = new Intent(getApplicationContext(), CreateReminderActivity.class);
+                                                            startActivity(intent_create);
+                                                            break;
+                                                        case 2:
+                                                            break;
+                                                    }
+                                                }
+                                            });
 
                                 }
                             });
